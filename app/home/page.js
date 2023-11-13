@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import LocalMallRoundedIcon from "@mui/icons-material/LocalMallRounded";
 import { ListOfProductToBuy, SearchProduct, ModalPayments } from "../components";
+
 const ProductList = [
   { id: 1, idTipo: 1, producto: { nombre: "Coca cola 350ml.", precio: 12.00, stock: 2 }, servicio: {} },
   { id: 2, idTipo: 1, producto: { nombre: "Barrita de fresa", precio: 15.00, stock: 14 }, servicio: {} },
@@ -32,11 +33,11 @@ const ProductList = [
 ];
 
 const ClientList = [
-  { id: 1, name: "fulano" },
-  { id: 2, name: "Vengano Herrera" },
-  { id: 3, name: "Juan" },
-  { id: 4, name: "Pedro" },
-  { id: 5, name: "Bart" },
+  { id: 1, nombre: "fulano" },
+  { id: 2, nombre: "Vengano Herrera" },
+  { id: 3, nombre: "Juan" },
+  { id: 4, nombre: "Pedro" },
+  { id: 5, nombre: "Bart" },
 ];
 
 // const ProductList = [];
@@ -64,22 +65,23 @@ const Inicio = () => {
     const dataProduct = productsToBuy.find(item => item.id === product.id);
     if (dataProduct) {
       const newQuantity = productsToBuy.map(
-        (item) =>
-          {
-            if(item.id === product.id && item.quantityToBuy + 1 > item?.producto?.stock) {
-              toast({
-                title: "El producto no tiene más stock.",
-                position: "bottom-right",
-                status: "warning",
-                isClosable: true
-              });
-            }
-            return item.id === product.id
-            ? { ...item, quantityToBuy: (item.quantityToBuy + 1 > item?.producto?.stock
-              ? item.producto.stock
-              : item.quantityToBuy + 1)}
-            : item
+        (item) => {
+          if (item.id === product.id && item.quantityToBuy + 1 > item?.producto?.stock) {
+            toast({
+              title: "El producto no tiene más stock.",
+              position: "bottom-right",
+              status: "warning",
+              isClosable: true
+            });
           }
+          return item.id === product.id
+            ? {
+              ...item, quantityToBuy: (item.quantityToBuy + 1 > item?.producto?.stock
+                ? item.producto.stock
+                : item.quantityToBuy + 1)
+            }
+            : item
+        }
       );
       setProductsToBuy(newQuantity);
     } else {
@@ -96,12 +98,12 @@ const Inicio = () => {
     () => {
       const subTotalProduct = productsToBuy.reduce((acumulador, element) => {
         return acumulador + (element.idTipo === 1
-          ? element.producto.precio : element.servicio.precio ) * element.quantityToBuy;
+          ? element.producto.precio : element.servicio.precio) * element.quantityToBuy;
       }, 0);
       const subTotal = (subTotalProduct + Number(amountOther))
       const percentDiscount = (subTotal / 100) * Number(amountDiscount);
       const percentTip = (subTotal / 100) * Number(amountTip);
-      const total = subTotal + percentTip - percentDiscount;
+      const total = (subTotal + percentTip - percentDiscount).toFixed(2);
       setTotalToPay(total);
       localStorage.setItem("shoppingCart", JSON.stringify(productsToBuy));
     },

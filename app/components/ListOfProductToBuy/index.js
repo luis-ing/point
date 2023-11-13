@@ -42,7 +42,7 @@ const ListOfProductToBuy = ({
   };
 
   useEffect(() => {
-    if(productsToBuy.length > 0) {
+    if (productsToBuy.length > 0) {
       scrollToBottom();
     }
   }, [productsToBuy]);
@@ -85,94 +85,94 @@ const ListOfProductToBuy = ({
         ref={listRef}
       >
         {productsToBuy.length > 0
-          ? productsToBuy.map(item => 
+          ? productsToBuy.map(item =>
             <CardOfProductToBuy key={item.id} item={item} DeleteProductToBuy={DeleteProductToBuy} />)
           : <Box pt={6}>
-              <Center>
-                <Text fontSize="md" textAlign="center">
-                  Agrega productos
-                </Text>
-              </Center>
-              <Center pt={4}>
-                <Icon as={AddShoppingCartIcon} w={10} h={10} />
-              </Center>
-            </Box>}
+            <Center>
+              <Text fontSize="md" textAlign="center">
+                Agrega productos
+              </Text>
+            </Center>
+            <Center pt={4}>
+              <Icon as={AddShoppingCartIcon} w={10} h={10} />
+            </Center>
+          </Box>}
       </Box>
       <Divider pt={3} />
       <Box mt={2}>
         <Box display="flex" mt={2}>
-            <Box display="flex" alignItems="center" w="50%">
-              <Icon as={Inventory2Icon} />
-              <Text
-                pl={2}
-                fontSize='md'
-              >
-                Otros
-              </Text>
-            </Box>
-            <InputGroup w="50%">
-              <InputLeftElement
-                pointerEvents='none'
-                fontSize='1.2em'
-                children='$'
-              />
-              <Input
-                type="number"
-                placeholder='0.00'
-                value={amountOther}
-                onChange={(e) => setAmountOther(e.target.value)}
-              />
-            </InputGroup>
+          <Box display="flex" alignItems="center" w="50%">
+            <Icon as={Inventory2Icon} />
+            <Text
+              pl={2}
+              fontSize='md'
+            >
+              Otros
+            </Text>
+          </Box>
+          <InputGroup w="50%">
+            <InputLeftElement
+              pointerEvents='none'
+              fontSize='1.2em'
+              children='$'
+            />
+            <Input
+              type="number"
+              placeholder='0.00'
+              value={amountOther}
+              onChange={(e) => setAmountOther(e.target.value)}
+            />
+          </InputGroup>
         </Box>
         <Box display="flex" mt={2}>
-            <Box display="flex" alignItems="center" w="50%">
-              <Icon as={DiscountIcon} />
-              <Text pl={2} fontSize='md'>Descuentos</Text>
-            </Box>
-            <InputGroup w="50%">
+          <Box display="flex" alignItems="center" w="50%">
+            <Icon as={DiscountIcon} />
+            <Text pl={2} fontSize='md'>Descuentos</Text>
+          </Box>
+          <InputGroup w="50%">
             <InputRightElement
-                pointerEvents='none'
-                fontSize='1.2em'
-                children='%'
-                pr={10}
-              />
-              <InputRightElement
-                pointerEvents='none'
-                fontSize='1.2em'
-                children='$'
-              />
-              <Input
-                type="number"
-                placeholder='0'
-                value={amountDiscount}
-                onChange={(e) => setAmountDiscount(e.target.value)}
-              />
-            </InputGroup>
+              pointerEvents='none'
+              fontSize='1.2em'
+              children='%'
+              pr={10}
+            />
+            <InputRightElement
+              pointerEvents='none'
+              fontSize='1.2em'
+              children='$'
+            />
+            <Input
+              type="number"
+              placeholder='0'
+              value={amountDiscount}
+              onChange={(e) => setAmountDiscount(e.target.value)}
+            />
+          </InputGroup>
         </Box>
         <Box display="flex" mt={2}>
-            <Box display="flex" alignItems="center" w="50%">
-              <Icon as={VolunteerActivismIcon} />
-              <Text pl={2} fontSize='md' >Propina</Text>
-            </Box>
-            <InputGroup w="50%">
-              <InputRightElement
-                pointerEvents='none'
-                fontSize='1.2em'
-                children='%'
-                pr={10}
-              />
-              <InputRightElement
-                pointerEvents='none'
-                fontSize='1.2em'
-                children='$'
-              />
-              <Input
-                type="number"
-                placeholder='0'
-                value={amountTip}
-                onChange={(e) => setAmountTip(e.target.value)}
-              />
-            </InputGroup>
+          <Box display="flex" alignItems="center" w="50%">
+            <Icon as={VolunteerActivismIcon} />
+            <Text pl={2} fontSize='md' >Propina</Text>
+          </Box>
+          <InputGroup w="50%">
+            <InputRightElement
+              pointerEvents='none'
+              fontSize='1.2em'
+              children='%'
+              pr={10}
+            />
+            <InputRightElement
+              pointerEvents='none'
+              fontSize='1.2em'
+              children='$'
+            />
+            <Input
+              type="number"
+              placeholder='0'
+              value={amountTip}
+              onChange={(e) => setAmountTip(e.target.value)}
+            />
+          </InputGroup>
         </Box>
       </Box>
       <Box pt={4}>

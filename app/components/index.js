@@ -5,6 +5,8 @@ import ListOfProductToBuy from "./ListOfProductToBuy";
 import CardOfProductToBuy from "./CardOfProductToBuy";
 import ListProductCartSkeleton from "./ListProductCartSkeleton";
 import ModalPayments from "./ModalPayments";
+import ModalProduct from "./ModalProduct";
+import ModalService from "./ModalService"
 
 export {
   NavBar,
@@ -13,5 +15,7 @@ export {
   ListOfProductToBuy,
   CardOfProductToBuy,
   ListProductCartSkeleton,
-  ModalPayments
+  ModalPayments,
+  ModalProduct,
+  ModalService
 };

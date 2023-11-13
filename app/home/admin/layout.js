@@ -69,10 +69,18 @@ const Layout = ({ children }) => {
           >
             <Icon as={InventoryIcon} mr={2} />
           </Tab>
-          <Tab>
+          <Tab
+            onClick={() => {
+              router.push("/home/admin/category");
+            }}
+          >
             <Icon as={CategoryIcon} mr={2} />
           </Tab>
-          <Tab>
+          <Tab
+            onClick={() => {
+              router.push("/home/admin/provider");
+            }}
+          >
             <Icon as={LocalShippingIcon} mr={2} />
           </Tab>
         </TabList>

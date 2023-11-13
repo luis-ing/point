@@ -10,8 +10,8 @@ import {
 import Cookies from "js-cookie";
 
 export const AuthContext = createContext({
-    login: (authTokens) => {},
-    logout: () => {},
+    login: (authTokens) => { },
+    logout: () => { },
     // darkMode: false,
 });
 
@@ -32,13 +32,13 @@ const AuthContextProvider = ({ children }) => {
         console.log('localStorage.getItem(DarkMode) ', !Boolean(localStorage.getItem(DarkMode)), localStorage.getItem(DarkMode));
         // setDarkMode(false);
     }, []);
-    
+
     const logout = useCallback(() => {
         Cookies.remove("authTokens");
         localStorage.removeItem(DarkMode);
         // setDarkMode(false);
     }, []);
-    
+
     const value = useMemo(
         () => ({
             login,

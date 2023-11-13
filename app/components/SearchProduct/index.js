@@ -17,7 +17,7 @@ import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfi
 import ListProductCard from "../ListProductCard";
 import ListProductCartSkeleton from "../ListProductCartSkeleton";
 
-const SearchProduct = ({ ProductList, loadingData, AddProductToBuy }) => {
+const SearchProduct = ({ ProductList, loadingData, AddProductToBuy, title = 'productos' }) => {
   const color = useColorModeValue("gray.600", "gray.300");
   const [inputValue, setInputValue] = useState("");
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
@@ -75,26 +75,25 @@ const SearchProduct = ({ ProductList, loadingData, AddProductToBuy }) => {
         {!loadingData
           ? filteredSuggestions.length > 0
             ? filteredSuggestions.map((item, index) =>
-                <ListProductCard
-                  key={index}
-                  dataProduct={item}
-                  AddProductToBuy={AddProductToBuy}
-                />
-              )
+              <ListProductCard
+                key={index}
+                dataProduct={item}
+                AddProductToBuy={AddProductToBuy}
+              />
+            )
             : <Box pt={16}>
-                <Center>
-                  <Text fontSize="md" textAlign="center">
-                    No se encontraron productos, ¡Empieza agregando tus
-                    productos!
-                  </Text>
-                </Center>
-                <Center pt={4}>
-                  <Icon as={SentimentVerySatisfiedIcon} w={12} h={12} />
-                </Center>
-              </Box>
+              <Center>
+                <Text fontSize="md" textAlign="center">
+                  {`No se encontraron ${title}, ¡Empieza agregándolos!`}
+                </Text>
+              </Center>
+              <Center pt={4}>
+                <Icon as={SentimentVerySatisfiedIcon} w={12} h={12} />
+              </Center>
+            </Box>
           : <Box>
-              <ListProductCartSkeleton />
-            </Box>}
+            <ListProductCartSkeleton />
+          </Box>}
       </Box>
     </div>
   );

@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import { Input, List, ListItem, Box, Card, CardBody } from "@chakra-ui/react";
 
 const Autocomplete = ({
-    suggestions,
-    onSelected,
-    placeholder = "Search",
-    isRequired = false,
-  }) => {
-  const [inputValue, setInputValue] = useState("");
+  suggestions,
+  onSelected,
+  placeholder = "Search",
+  isRequired = false,
+  value = "",
+}) => {
+  const [inputValue, setInputValue] = useState(value);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(-1);
@@ -15,7 +16,7 @@ const Autocomplete = ({
   useEffect(
     () => {
       const filtered = suggestions.filter(suggestion =>
-        suggestion.name.toLowerCase().includes(inputValue.toLowerCase())
+        suggestion.nombre.toLowerCase().includes(inputValue.toLowerCase())
       );
       setFilteredSuggestions(filtered);
     },
@@ -52,7 +53,7 @@ const Autocomplete = ({
   };
 
   const handleSelectSuggestion = suggestion => {
-    setInputValue(suggestion.name);
+    setInputValue(suggestion.nombre);
     setIsOpen(false);
     onSelected(suggestion);
     setSelectedOptionIndex(-1);
@@ -85,7 +86,7 @@ const Autocomplete = ({
                   bg={selectedOptionIndex === index && "orange.300"}
                   _hover={{ bg: "orange.300" }}
                 >
-                  {suggestion.name}
+                  {suggestion.nombre}
                 </ListItem>
               )}
             </CardBody>
