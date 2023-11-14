@@ -6,7 +6,9 @@ import CardOfProductToBuy from "./CardOfProductToBuy";
 import ListProductCartSkeleton from "./ListProductCartSkeleton";
 import ModalPayments from "./ModalPayments";
 import ModalProduct from "./ModalProduct";
-import ModalService from "./ModalService"
+import ModalService from "./ModalService";
+import InventoryInformationGeneral from "./InventoryInformationGeneral";
+import ProductTable from "./ProductTable";
 
 export {
   NavBar,
@@ -17,5 +19,7 @@ export {
   ListProductCartSkeleton,
   ModalPayments,
   ModalProduct,
-  ModalService
+  ModalService,
+  InventoryInformationGeneral,
+  ProductTable,
 };

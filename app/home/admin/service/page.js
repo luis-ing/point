@@ -71,7 +71,7 @@ const Service = () => {
     setListProduct(ProductList);
     setTimeout(() => {
       setLoading(false);
-    }, 800);
+    }, 600);
   }, []);
 
   return (
@@ -85,7 +85,7 @@ const Service = () => {
         loadingButton={loadingButton}
       />
       <Box display="flex" justifyContent="space-between">
-        <Heading pl={2} size="sm">
+        <Heading pl={2} size="md">
           Servicio
         </Heading>
         <Button

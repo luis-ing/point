@@ -52,7 +52,7 @@ const ListOfProductToBuy = ({
       <Box width="100%">
         <Box display="flex" alignItems="flex-end">
           <Icon as={ShoppingCartIcon} boxSize={5} />
-          <Heading pl={2} size="sm">
+          <Heading pl={2} size="md">
             Carrito
           </Heading>
         </Box>

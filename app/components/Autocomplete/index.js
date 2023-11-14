@@ -23,6 +23,12 @@ const Autocomplete = ({
     [inputValue, suggestions]
   );
 
+  useEffect(() => {
+    if (suggestions.length === filteredSuggestions.length) {
+      onSelected({});
+    }
+  }, [filteredSuggestions]);
+
   const handleInputChange = e => {
     setInputValue(e.target.value);
   };

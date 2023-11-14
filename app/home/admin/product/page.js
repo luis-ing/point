@@ -152,7 +152,7 @@ const SupplierList = [
 
 
 const Product = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const color = useColorModeValue("gray.600", "gray.300");
   const [listProduct, setListProduct] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -226,7 +226,7 @@ const Product = () => {
     setListProduct(ProductList);
     setTimeout(() => {
       setLoading(false);
-    }, 800);
+    }, 600);
   }, []);
 
   return (
@@ -244,7 +244,7 @@ const Product = () => {
         loadingButton={loadingButton}
       />
       <Box display="flex" justifyContent="space-between">
-        <Heading pl={2} size="sm">
+        <Heading pl={2} size="md">
           Productos
         </Heading>
         <Button

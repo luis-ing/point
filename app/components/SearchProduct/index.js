@@ -11,7 +11,6 @@ import {
   Text,
   useColorModeValue
 } from "@chakra-ui/react";
-import LocalMallRoundedIcon from "@mui/icons-material/LocalMallRounded";
 import SearchIcon from "@mui/icons-material/Search";
 import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
 import ListProductCard from "../ListProductCard";

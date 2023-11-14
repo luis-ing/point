@@ -19,24 +19,11 @@ import {
 const ListProductCard = ({ dataProduct, AddProductToBuy }) => {
   const color = useColorModeValue("gray.600", "gray.300");
   const { colorMode } = useColorMode();
-  const [isClicked, setIsClicked] = useState(false);
   const theme = useTheme();
 
-  const handleMouseDown = () => {
-    setIsClicked(true);
-  };
-
-  const handleMouseUp = () => {
-    setIsClicked(false);
-  };
-
-  // console.log('colorMode ', colorMode);
   const customColor = theme.colorsCustom.colorBackgroundOnSelected[colorMode];
-  const cardBackgroundColor = theme.components.Card.baseStyle.container.backgroundColor;
-  const cardColor = isClicked ? customColor : cardBackgroundColor;
   const colorHover = theme.colorsCustom.colorBackgroundOnHover[colorMode];
 
-  console.log('cardColor ', cardColor);
 
   return (
     <Card

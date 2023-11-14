@@ -114,7 +114,7 @@ const Inicio = () => {
     setListProduct(ProductList);
     setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 600);
   }, []);
 
   const paddingBottom = useBreakpointValue({
@@ -152,7 +152,7 @@ const Inicio = () => {
               <Box width="100%" display="flex" pt={6}>
                 <Box display="flex" alignItems="flex-end">
                   <Icon as={LocalMallRoundedIcon} boxSize={5} />
-                  <Heading pl={2} size="sm">
+                  <Heading pl={2} size="md">
                     Ventas
                   </Heading>
                 </Box>
