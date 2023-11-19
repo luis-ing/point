@@ -16,7 +16,7 @@ import {
     InputLeftElement,
     Input,
     useColorModeValue,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
 import Autocomplete from '../Autocomplete';
 
 const ModalProduct = ({
@@ -78,7 +78,7 @@ const ModalProduct = ({
                             </InputGroup>
                         </FormControl>
                         <FormControl mb={4}>
-                            <FormLabel>Precio</FormLabel>
+                            <FormLabel>Precio de venta</FormLabel>
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'

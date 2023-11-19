@@ -16,7 +16,7 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import LocalMallRoundedIcon from "@mui/icons-material/LocalMallRounded";
-import { ListOfProductToBuy, SearchProduct, ModalPayments } from "../components";
+import { ListOfProductToBuy, SearchProduct, ModalPayments, ModalWarning } from "../components";
 
 const ProductList = [
   { id: 1, idTipo: 1, producto: { nombre: "Coca cola 350ml.", precio: 12.00, stock: 2 }, servicio: {} },
@@ -50,15 +50,13 @@ const Inicio = () => {
   const [amountOther, setAmountOther] = useState("");
   const [amountDiscount, setAmountDiscount] = useState("");
   const [amountTip, setAmountTip] = useState("");
-  const [productsToBuy, setProductsToBuy] = useState(
-    localStorage.getItem("shoppingCart")
-      ? JSON.parse(localStorage.getItem("shoppingCart"))
-      : []
-  );
+  const [productsToBuy, setProductsToBuy] = useState([]);
   const [methodSelected, setMethodSelected] = useState(1);
   const [clientSelected, setClientSelected] = useState({});
   const [loadingSendPay, setLoadingSendPay] = useState(false);
+  const [loadingButton, setLoadingButton] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isOpenDelete, onOpen: onOpenDelete, onClose: onCloseDelete } = useDisclosure();
   const toast = useToast();
 
   const AddProductToBuy = product => {
@@ -94,6 +92,20 @@ const Inicio = () => {
     setProductsToBuy(newData);
   };
 
+  const handleModalDeleteCart = () => {
+    onOpenDelete();
+  }
+
+  const deleteCartToBuy = () => {
+    setLoadingButton(true);
+    setTimeout(() => {
+      setLoadingButton(false);
+      onCloseDelete();
+
+      setProductsToBuy([]);
+    }, 2000);
+  }
+
   useEffect(
     () => {
       const subTotalProduct = productsToBuy.reduce((acumulador, element) => {
@@ -112,6 +124,7 @@ const Inicio = () => {
 
   useEffect(() => {
     setListProduct(ProductList);
+    setProductsToBuy(JSON.parse(localStorage.getItem("shoppingCart")));
     setTimeout(() => {
       setLoading(false);
     }, 600);
@@ -182,6 +195,7 @@ const Inicio = () => {
                 amountTip={amountTip}
                 setAmountTip={setAmountTip}
                 onOpen={onOpen}
+                deleteCartToBuy={handleModalDeleteCart}
               />
             </Container>
           </GridItem>
@@ -197,6 +211,13 @@ const Inicio = () => {
         loadingSendPay={loadingSendPay}
         methodSelected={methodSelected}
         setMethodSelected={setMethodSelected}
+      />
+      <ModalWarning
+        isOpen={isOpenDelete}
+        onClose={onCloseDelete}
+        DeleteProduct={deleteCartToBuy}
+        loadingButton={loadingButton}
+        text="¿Confirmas que quieres vacíar el carrito?"
       />
     </>
   );

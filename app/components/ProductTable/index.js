@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import {
+    Avatar,
     Badge,
     Box,
     FormControl,
@@ -24,7 +25,6 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { CurrencyFormat } from "@/app/utils";
 import Autocomplete from "../Autocomplete";
 
@@ -102,6 +102,7 @@ const ProductTable = ({ listProduct, ClassificationList }) => {
                     <Table variant="simple">
                         <Thead>
                             <Tr>
+                                <Th></Th>
                                 <Th>Producto</Th>
                                 <Th>Clasificación</Th>
                                 <Th>Stock</Th>
@@ -115,7 +116,16 @@ const ProductTable = ({ listProduct, ClassificationList }) => {
                                     color={color}
                                     _hover={{ bgColor: colorHover }}
                                 >
-                                    <Td>{item.producto.nombre}</Td>
+                                    <Td>
+                                        <Avatar
+                                            name="Aguacate Chiapas"
+                                            src="https://www.gob.mx/cms/uploads/article/main_image/33769/SANDIA.jpg"
+                                            size='sm'
+                                        />
+                                    </Td>
+                                    <Td>
+                                        {item.producto.nombre}
+                                    </Td>
                                     <Td>
                                         <Badge
                                             colorScheme={item.producto?.clasificacion?.color}
@@ -129,7 +139,7 @@ const ProductTable = ({ listProduct, ClassificationList }) => {
                                     <Td>
                                         <IconButton color={color} variant="ghost" icon={<AddIcon />} />
                                         <IconButton color={color} variant="ghost" icon={<EditIcon />} />
-                                        <IconButton color={color} variant="ghost" icon={<DeleteIcon />} />
+                                        {/* <IconButton color={color} variant="ghost" icon={<DeleteIcon />} /> */}
                                     </Td>
                                 </Tr>
                             ))}

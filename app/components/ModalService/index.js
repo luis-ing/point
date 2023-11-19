@@ -73,7 +73,7 @@ const ModalService = ({
                             </InputGroup>
                         </FormControl>
                         <FormControl mb={4}>
-                            <FormLabel>Precio</FormLabel>
+                            <FormLabel>Precio de venta</FormLabel>
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
@@ -87,6 +87,26 @@ const ModalService = ({
                                     placeholder='0.00'
                                     name='precio'
                                     value={dataForm.precio}
+                                    onChange={handlerChange}
+                                    required
+                                />
+                            </InputGroup>
+                        </FormControl>
+                        <FormControl mb={4}>
+                            <FormLabel>Precio de gastos de insumo</FormLabel>
+                            <InputGroup>
+                                <InputLeftElement
+                                    pointerEvents='none'
+                                    color={color}
+                                    fontSize='1.2em'
+                                    children='$'
+                                />
+                                <Input
+                                    type="number"
+                                    autoComplete="off"
+                                    placeholder='0.00'
+                                    name='precioGastoInsumo'
+                                    value={dataForm.precioGastoInsumo}
                                     onChange={handlerChange}
                                     required
                                 />

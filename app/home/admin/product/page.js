@@ -11,7 +11,7 @@ import {
   useToast
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
-import { SearchProduct, ModalProduct } from "@/app/components";
+import { SearchProduct, ModalProduct, ModalWarning } from "@/app/components";
 
 const ProductList = [
   {
@@ -153,11 +153,13 @@ const SupplierList = [
 
 const Product = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isOpenDelete, onOpen: onOpenDelete, onClose: onCloseDelete } = useDisclosure();
   const color = useColorModeValue("gray.600", "gray.300");
   const [listProduct, setListProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [supplierSelected, setSupplierSelected] = useState({});
   const [ClassificationSelected, setClassificationSelected] = useState({});
+  const [productToDelete, setProductToDelete] = useState({});
   const [dataForm, setDataForm] = useState({
     nombre: '',
     descripcion: '',
@@ -198,6 +200,11 @@ const Product = () => {
     onOpen();
   };
 
+  const productSelectedDelete = product => {
+    setProductToDelete(product);
+    onOpenDelete();
+  }
+
   useEffect(() => {
     setDataForm((e) => ({ ...e, clasificacion: ClassificationSelected }))
   }, [ClassificationSelected]);
@@ -206,19 +213,37 @@ const Product = () => {
     setDataForm((e) => ({ ...e, proveedor: supplierSelected }))
   }, [supplierSelected]);
 
+  const DeleteProduct = () => {
+    setLoadingButton(true);
+    setTimeout(() => {
+      setLoadingButton(false);
+      onCloseDelete();
+      console.log('Eliminar ', productToDelete);
+
+      toast({
+        title: "Datos eliminados correctamente",
+        position: "bottom-right",
+        status: "success",
+        isClosable: true
+      });
+    }, 1000);
+  }
+
   const saveProductData = (e) => {
     e.preventDefault();
     setLoadingButton(true);
     setTimeout(() => {
+      setLoadingButton(false);
+      onClose();
       console.log('dataForm ', dataForm);
+
       toast({
         title: "Datos guadados exitosamente",
         position: "bottom-right",
         status: "success",
         isClosable: true
       });
-      onClose();
-      setLoadingButton(false);
+
     }, 2000);
   }
 
@@ -243,6 +268,13 @@ const Product = () => {
         setDataForm={setDataForm}
         loadingButton={loadingButton}
       />
+      <ModalWarning
+        isOpen={isOpenDelete}
+        onClose={onCloseDelete}
+        DeleteProduct={DeleteProduct}
+        loadingButton={loadingButton}
+        text="¿Confirmas que quieres eliminar este producto?"
+      />
       <Box display="flex" justifyContent="space-between">
         <Heading pl={2} size="md">
           Productos
@@ -260,6 +292,8 @@ const Product = () => {
         ProductList={listProduct}
         loadingData={loading}
         AddProductToBuy={productSelected}
+        Edit={true}
+        DeleteProduct={productSelectedDelete}
       />
     </Container>
   );

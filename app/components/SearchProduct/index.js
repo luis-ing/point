@@ -16,7 +16,7 @@ import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfi
 import ListProductCard from "../ListProductCard";
 import ListProductCartSkeleton from "../ListProductCartSkeleton";
 
-const SearchProduct = ({ ProductList, loadingData, AddProductToBuy, title = 'productos' }) => {
+const SearchProduct = ({ ProductList, loadingData, AddProductToBuy, title = 'productos', Edit = false, DeleteProduct }) => {
   const color = useColorModeValue("gray.600", "gray.300");
   const [inputValue, setInputValue] = useState("");
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
@@ -78,6 +78,8 @@ const SearchProduct = ({ ProductList, loadingData, AddProductToBuy, title = 'pro
                 key={index}
                 dataProduct={item}
                 AddProductToBuy={AddProductToBuy}
+                Edit={Edit}
+                DeleteProduct={DeleteProduct}
               />
             )
             : <Box pt={16}>

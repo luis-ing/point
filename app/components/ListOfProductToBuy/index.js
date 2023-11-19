@@ -13,14 +13,18 @@ import {
   InputLeftElement,
   useColorModeValue,
   InputRightElement,
-  Button
+  Button,
+  IconButton,
+  Tooltip
 } from "@chakra-ui/react";
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import DiscountIcon from '@mui/icons-material/Discount';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import CardOfProductToBuy from "../CardOfProductToBuy";
+import { CurrencyFormat } from "@/app/utils";
 
 const ListOfProductToBuy = ({
   totalToPay,
@@ -32,7 +36,8 @@ const ListOfProductToBuy = ({
   setAmountDiscount,
   amountTip,
   setAmountTip,
-  onOpen
+  onOpen,
+  deleteCartToBuy,
 }) => {
   const color = useColorModeValue('gray.600', 'gray.300');
   const listRef = useRef(null);
@@ -57,12 +62,19 @@ const ListOfProductToBuy = ({
           </Heading>
         </Box>
       </Box>
-      <Box pt={2} pb={2}>
+      <Box pt={2} pb={2} display="flex" justifyContent="space-evenly">
         <Center>
           <Heading as="h3" size="lg">
-            {`Total $${totalToPay}`}
+            {`Total ${CurrencyFormat(totalToPay)}`}
           </Heading>
         </Center>
+        <Tooltip label='Vacíar carrito'>
+          <IconButton
+            size='sm'
+            icon={<RemoveShoppingCartIcon color={color} onClick={deleteCartToBuy} />}
+            isDisabled={productsToBuy.length === 0}
+          />
+        </Tooltip>
       </Box>
       <Divider />
       <Box
@@ -176,8 +188,8 @@ const ListOfProductToBuy = ({
         </Box>
       </Box>
       <Box pt={4}>
-        <Button colorScheme='orange' w="100%" onClick={onOpen} isDisabled={totalToPay === 0}>
-          {`Aceptar pago: $${totalToPay}`}
+        <Button colorScheme='orange' w="100%" onClick={onOpen} isDisabled={Number(totalToPay) === 0}>
+          {`Aceptar pago: ${CurrencyFormat(totalToPay)}`}
         </Button>
       </Box>
     </Box>
