@@ -11,13 +11,14 @@ import {
   useDisclosure,
   useToast
 } from "@chakra-ui/react";
-import { InventoryInformationGeneral, ProductTable } from "@/app/components";
+import { InventoryInformationGeneral, ProductTable, ModalInventoryAdd } from "@/app/components";
 
 const ProductList = [
   {
     id: 1,
     idTipo: 1,
     producto: {
+      idProducto: 1,
       nombre: "Coca cola 350ml.",
       descripcion: "Bebida carbonatada",
       precio: 12.0,
@@ -34,6 +35,7 @@ const ProductList = [
     id: 2,
     idTipo: 1,
     producto: {
+      idProducto: 2,
       nombre: "Barrita de fresa",
       descripcion: "",
       precio: 15.0,
@@ -50,6 +52,7 @@ const ProductList = [
     id: 3,
     idTipo: 1,
     producto: {
+      idProducto: 3,
       nombre: "Bolsa de manzana",
       descripcion: "",
       precio: 50.0,
@@ -66,6 +69,7 @@ const ProductList = [
     id: 4,
     idTipo: 1,
     producto: {
+      idProducto: 4,
       nombre: "Bolsa de Damasco",
       descripcion: "",
       precio: 24.5,
@@ -82,6 +86,7 @@ const ProductList = [
     id: 5,
     idTipo: 1,
     producto: {
+      idProducto: 5,
       nombre: "Bolsa de Kiwi",
       descripcion: "",
       precio: 18.5,
@@ -98,6 +103,7 @@ const ProductList = [
     id: 6,
     idTipo: 1,
     producto: {
+      idProducto: 6,
       nombre: "Media crema",
       descripcion: "Producto lacteo",
       precio: 12.5,
@@ -114,6 +120,7 @@ const ProductList = [
     id: 7,
     idTipo: 1,
     producto: {
+      idProducto: 7,
       nombre: "Bolsa de mandarina",
       descripcion: "",
       precio: 45.0,
@@ -130,6 +137,7 @@ const ProductList = [
     id: 8,
     idTipo: 1,
     producto: {
+      idProducto: 8,
       nombre: "Bolsa de aguacate",
       descripcion: "",
       precio: 40.0,
@@ -155,12 +163,44 @@ const Inventory = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const color = useColorModeValue("gray.600", "gray.300");
   const [listProduct, setListProduct] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [dataForm, setDataForm] = useState({});
+  const [loadingButton, setLoadingButton] = useState(false);
+  const toast = useToast();
+
+  const handleModalAddInventory = (product) => {
+    setDataForm({
+      idProducto: product.producto.idProducto,
+      nombre: product.producto.nombre,
+      stock: product.producto.stock,
+      stockAdd: '',
+      precioCompra: product.producto.precioCompra,
+      precio: product.producto.precio,
+    });
+
+    onOpen();
+  }
+
+  const saveProductData = (e) => {
+    e.preventDefault();
+    setLoadingButton(true);
+    setTimeout(() => {
+      setLoadingButton(false);
+      onClose();
+      console.log('dataForm ', dataForm);
+
+      toast({
+        title: "Los productos se añadieron correctamente.",
+        position: "bottom-right",
+        status: "success",
+        isClosable: true
+      });
+    }, 1500);
+  }
 
   useEffect(() => {
     setListProduct(ProductList);
     setTimeout(() => {
-      setLoading(false);
+      setLoadingButton(false);
     }, 800);
   }, []);
 
@@ -182,6 +222,15 @@ const Inventory = () => {
       <ProductTable
         listProduct={listProduct}
         ClassificationList={ClassificationList}
+        handleModalAddInventory={handleModalAddInventory}
+      />
+      <ModalInventoryAdd
+        isOpen={isOpen}
+        onClose={onClose}
+        saveProductData={saveProductData}
+        dataForm={dataForm}
+        setDataForm={setDataForm}
+        loadingButton={loadingButton}
       />
     </Container>
   );

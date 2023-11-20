@@ -16,15 +16,16 @@ import {
     InputLeftElement,
     Input,
     useColorModeValue,
+    Text,
 } from '@chakra-ui/react';
 
-const ModalService = ({
+const ModalInventoryAdd = ({
     isOpen,
     onClose,
     saveProductData,
     dataForm,
     setDataForm,
-    loadingButton
+    loadingButton,
 }) => {
     const color = useColorModeValue("gray.600", "gray.300");
 
@@ -40,40 +41,64 @@ const ModalService = ({
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader>Servicio</ModalHeader>
+                <ModalHeader>Agregar inventario</ModalHeader>
                 <ModalCloseButton />
                 <form onSubmit={(e) => saveProductData(e)}>
                     <ModalBody>
                         <FormControl mb={4}>
-                            <FormLabel>Nombre de servicio</FormLabel>
+                            <FormLabel>Nombre de producto</FormLabel>
                             <InputGroup>
                                 <Input
                                     type="text"
                                     autoComplete="off"
-                                    placeholder='Manicura'
-                                    autoFocus
+                                    placeholder='Coca cola'
                                     name='nombre'
-                                    value={dataForm.nombre}
+                                    isDisabled
+                                    value={dataForm?.nombre}
                                     onChange={handlerChange}
                                     required
                                 />
                             </InputGroup>
                         </FormControl>
                         <FormControl mb={4}>
-                            <FormLabel>Descripción (Opcional)</FormLabel>
+                            <FormLabel>Cantidad actual de producto</FormLabel>
                             <InputGroup>
                                 <Input
-                                    type="text"
+                                    type="number"
                                     autoComplete="off"
-                                    placeholder='Tratamiento de belleza cosmético para las uñas'
-                                    name='descripcion'
-                                    value={dataForm.descripcion}
+                                    placeholder='12'
+                                    name='stock'
+                                    isDisabled
+                                    value={dataForm?.stock}
                                     onChange={handlerChange}
+                                    required
                                 />
                             </InputGroup>
                         </FormControl>
                         <FormControl mb={4}>
-                            <FormLabel>Precio de gastos de insumo</FormLabel>
+                            <FormLabel>Cantidad a ingresar</FormLabel>
+                            <InputGroup>
+                                <Input
+                                    type="number"
+                                    autoComplete="off"
+                                    placeholder='1'
+                                    autoFocus
+                                    name='stockAdd'
+                                    min={1}
+                                    value={dataForm.stockAdd}
+                                    onChange={handlerChange}
+                                    required
+                                />
+                            </InputGroup>
+                        </FormControl>
+                        <FormControl mb={4}>
+                            <FormLabel>Cantidad total</FormLabel>
+                            <InputGroup>
+                                <Text pl={4} fontSize='lg'>{Number(dataForm.stockAdd) + dataForm?.stock}</Text>
+                            </InputGroup>
+                        </FormControl>
+                        <FormControl mb={4}>
+                            <FormLabel>Precio de compra</FormLabel>
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
@@ -85,8 +110,9 @@ const ModalService = ({
                                     type="number"
                                     autoComplete="off"
                                     placeholder='0.00'
-                                    name='precioGastoInsumo'
-                                    value={dataForm.precioGastoInsumo}
+                                    name='precioCompra'
+                                    value={dataForm?.precioCompra}
+                                    min={0}
                                     onChange={handlerChange}
                                     required
                                 />
@@ -106,7 +132,7 @@ const ModalService = ({
                                     autoComplete="off"
                                     placeholder='0.00'
                                     name='precio'
-                                    value={dataForm.precio}
+                                    value={dataForm?.precio}
                                     onChange={handlerChange}
                                     required
                                 />
@@ -132,4 +158,4 @@ const ModalService = ({
     )
 }
 
-export default ModalService;
+export default ModalInventoryAdd

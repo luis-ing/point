@@ -16,8 +16,12 @@ import {
     InputLeftElement,
     Input,
     useColorModeValue,
+    Switch,
+    Icon,
+    Tooltip,
 } from '@chakra-ui/react';
 import Autocomplete from '../Autocomplete';
+import HelpIcon from '@mui/icons-material/Help';
 
 const ModalProduct = ({
     isOpen,
@@ -35,10 +39,15 @@ const ModalProduct = ({
 
     const handlerChange = (e) => {
         const { name, value } = e.target;
+        console.log('name and value -> ', e.target);
         setDataForm((e) => ({
             ...e,
             [name]: value,
         }));
+    }
+
+    const hanlderChangeBoolean = () => {
+        setDataForm(e => ({ ...e, usarInventario: !dataForm.usarInventario }))
     }
 
     return (
@@ -74,6 +83,26 @@ const ModalProduct = ({
                                     name='descripcion'
                                     value={dataForm.descripcion}
                                     onChange={handlerChange}
+                                />
+                            </InputGroup>
+                        </FormControl>
+                        <FormControl mb={4}>
+                            <FormLabel>Precio de compra</FormLabel>
+                            <InputGroup>
+                                <InputLeftElement
+                                    pointerEvents='none'
+                                    color={color}
+                                    fontSize='1.2em'
+                                    children='$'
+                                />
+                                <Input
+                                    type="number"
+                                    autoComplete="off"
+                                    placeholder='0.00'
+                                    name='precioCompra'
+                                    value={dataForm.precioCompra}
+                                    onChange={handlerChange}
+                                    required
                                 />
                             </InputGroup>
                         </FormControl>
@@ -118,6 +147,35 @@ const ModalProduct = ({
                             />
                         </FormControl>
                         <FormControl mb={4}>
+                            <FormLabel>Usar inventario</FormLabel>
+                            <InputGroup display="flex" justifyContent="space-between">
+                                <Switch
+                                    name='usarInventario'
+                                    isChecked={dataForm.usarInventario}
+                                    onChange={hanlderChangeBoolean}
+                                    colorScheme='green'
+                                />
+                                <Tooltip label='Usar el inventario permitirá tener un mejor control de tus productos'>
+                                    <Icon as={HelpIcon} color={color} />
+                                </Tooltip>
+                            </InputGroup>
+                        </FormControl>
+                        {!dataForm.idProducto && <FormControl mb={4}>
+                            <FormLabel>Cantidad en stock</FormLabel>
+                            <InputGroup>
+                                <Input
+                                    type="number"
+                                    autoComplete="off"
+                                    placeholder='0'
+                                    name='stock'
+                                    value={dataForm.stock}
+                                    onChange={handlerChange}
+                                    required={dataForm.usarInventario}
+                                    disabled={!dataForm.usarInventario}
+                                />
+                            </InputGroup>
+                        </FormControl>}
+                        <FormControl mb={4}>
                             <FormLabel>Stock mínimo</FormLabel>
                             <InputGroup>
                                 <Input
@@ -127,7 +185,8 @@ const ModalProduct = ({
                                     name='stockMin'
                                     value={dataForm.stockMin}
                                     onChange={handlerChange}
-                                    required
+                                    required={dataForm.usarInventario}
+                                    disabled={!dataForm.usarInventario}
                                 />
                             </InputGroup>
                         </FormControl>
@@ -141,7 +200,8 @@ const ModalProduct = ({
                                     name='stockMax'
                                     value={dataForm.stockMax}
                                     onChange={handlerChange}
-                                    required
+                                    required={dataForm.usarInventario}
+                                    disabled={!dataForm.usarInventario}
                                 />
                             </InputGroup>
                         </FormControl>
@@ -161,7 +221,7 @@ const ModalProduct = ({
                     </ModalFooter>
                 </form>
             </ModalContent>
-        </Modal>
+        </Modal >
     )
 }
 

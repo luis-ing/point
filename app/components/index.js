@@ -10,6 +10,7 @@ import ModalService from "./ModalService";
 import InventoryInformationGeneral from "./InventoryInformationGeneral";
 import ProductTable from "./ProductTable";
 import ModalWarning from "./ModalWarning";
+import ModalInventoryAdd from "./ModalInventoryAdd";
 
 export {
   NavBar,
@@ -24,4 +25,5 @@ export {
   InventoryInformationGeneral,
   ProductTable,
   ModalWarning,
+  ModalInventoryAdd,
 };

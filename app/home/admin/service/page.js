@@ -26,28 +26,25 @@ const Service = () => {
   const [listProduct, setListProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [serviceToDelete, setServiceToDelete] = useState({});
-  const [dataForm, setDataForm] = useState({
-    nombre: '',
-    descripcion: '',
-    precio: '',
-    precioGastoInsumo: '',
-  });
+  const [dataForm, setDataForm] = useState({});
   const [loadingButton, setLoadingButton] = useState(false);
   const toast = useToast();
 
   const handlerModalOpen = () => {
     setDataForm({
+      idServicio: null,
       nombre: '',
       descripcion: '',
       precio: '',
       precioGastoInsumo: '',
     });
+
     onOpen();
   }
 
   const productSelected = service => {
-    console.log('service ', service);
     setDataForm({
+      idServicio: service.servicio.idServicio,
       nombre: service.servicio.nombre,
       descripcion: service.servicio.descripcion,
       precio: service.servicio.precio,

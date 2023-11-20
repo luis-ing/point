@@ -28,7 +28,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { CurrencyFormat } from "@/app/utils";
 import Autocomplete from "../Autocomplete";
 
-const ProductTable = ({ listProduct, ClassificationList }) => {
+const ProductTable = ({ listProduct, ClassificationList, handleModalAddInventory }) => {
     const color = useColorModeValue("gray.600", "gray.300");
     const { colorMode } = useColorMode();
     const theme = useTheme();
@@ -137,7 +137,12 @@ const ProductTable = ({ listProduct, ClassificationList }) => {
                                     <Td>{item.producto.stock}</Td>
                                     <Td>{CurrencyFormat(item.producto.precio)}</Td>
                                     <Td>
-                                        <IconButton color={color} variant="ghost" icon={<AddIcon />} />
+                                        <IconButton
+                                            color={color}
+                                            variant="ghost"
+                                            icon={<AddIcon />}
+                                            onClick={() => handleModalAddInventory(item)}
+                                        />
                                         <IconButton color={color} variant="ghost" icon={<EditIcon />} />
                                         {/* <IconButton color={color} variant="ghost" icon={<DeleteIcon />} /> */}
                                     </Td>
